@@ -1,17 +1,22 @@
 export default class Filme {
-    constructor(id, titulo, genero, classificacao, duracao, dataEstreia) {
-        this.id = id;
+    constructor(titulo, descricao, genero, classificacao, duracao, dataEstreia, id, imgPath) {
         this.titulo = titulo;
+        this.descricao = descricao;
         this.genero = genero;
         this.classificacao = classificacao;
         this.duracao = duracao;
         this.dataEstreia = dataEstreia;
+        this.id = id;
+        this.imgPath = imgPath;
     }
     getId() {
         return this.id;
     }
     getTitulo() {
         return this.titulo;
+    }
+    getDescricao() {
+        return this.descricao;
     }
     getGenero() {
         return this.genero;
@@ -25,11 +30,17 @@ export default class Filme {
     getDataEstreia() {
         return this.dataEstreia;
     }
+    getImgPath() {
+        return this.imgPath;
+    }
     setId(id) {
         this.id = id;
     }
     setTitulo(titulo) {
         this.titulo = titulo;
+    }
+    setDescricao(descricao) {
+        this.descricao = descricao;
     }
     setGenero(genero) {
         this.genero = genero;
@@ -39,6 +50,9 @@ export default class Filme {
     }
     setDuracao(duracao) {
         this.duracao = duracao;
+    }
+    setImgPath(imgPath) {
+        this.imgPath = imgPath;
     }
     setDataEstreia(dataEstreia) {
         this.dataEstreia = dataEstreia;
