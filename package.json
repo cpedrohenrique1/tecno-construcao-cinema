@@ -1,6 +1,8 @@
 {
   "devDependencies": {
-    "http-server": "^14.1.1",
-    "livereload": "^0.9.3"
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
   }
 }
