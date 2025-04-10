@@ -98,10 +98,24 @@
             <form id="formFilme">
               <input type="hidden" id="idFilme">
               <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
-              <input type="text" class="form-control mb-2" id="genero" placeholder="Gênero" required>
-              <input type="text" class="form-control mb-2" id="descricao" placeholder="Descrição" required>
-              <input type="number" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
-              <input type="text" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
+              <select name="genero" class="form-control mb-2" id="genero" placeholder="Gênero" required>
+                <option value="" disabled selected hidden>Selecione uma opção</option>
+                <option value="acao">Ação</option>
+                <option value="triste">Depressivo</option>
+                <option value="romance">Romance</option>
+                <option value="terror">Terror</option>
+              </select>
+              <textarea name="descricao" class="form-control mb-2" id="descricao" placeholder="Descrição" required></textarea>
+              <select name="classificacao" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
+                <option value="" disabled selected hidden>Selecione uma opção</option>
+                <option value="livre">Livre</option>
+                <option value="10">10 anos</option>
+                <option value="12">12 anos</option>
+                <option value="14">14 anos</option>
+                <option value="16">16 anos</option>
+                <option value="18">18 anos</option>
+              </select>
+              <input type="number" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
               <input type="date" class="form-control mb-2" id="dataEstreia" required>
             </form>
           </div>
