@@ -1,137 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
+
 <body>
-    <div class="container-fluid bg-dark">
-        <ul class="nav justify-content-end">
-          <li class="nav-item"> <a class="nav-link" href="/index.html">Home</a></li>
-          <li class="nav-item"> <a class="nav-link" href="./salas.html">Salas</a></li>
-          <li class="nav-item"> <a class="nav-link" href="./filmes.html">Filmes</a></li>
-          <li class="nav-item"> <a class="nav-link" href="./sessoes.html">Sessões</a></li>
-          <li class="nav-item"> <a class="nav-link" href="./ingressos.html">Ingressos</a></li>
-          <li class="nav-item"> <a class="nav-link disabled" href="./login.html">Login</a></li>
-        </ul>
+  <div class="container-fluid bg-dark">
+    <ul class="nav justify-content-end">
+      <li class="nav-item"> <a class="nav-link" href="/index.html">Home</a></li>
+      <li class="nav-item"> <a class="nav-link" href="/view/filmes.html">Filmes</a></li>
+      <li class="nav-item"> <a class="nav-link" href="/view/salas.html">Salas</a></li>
+      <li class="nav-item"> <a class="nav-link" href="/view/sessoes.html">Sessões</a></li>
+      <li class="nav-item"> <a class="nav-link" href="/view/ingressos.html">Ingressos</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <br>
+    <h3>Filmes</h3>
+    <hr>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-4">
+        <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalFilme">
+          Adicionar Filme
+        </button>
       </div>
-      <div class="container">
-        <br>
-        <h3>Filmes</h3>
-        <hr>
-        <div class="row">
-          <div class="col-12 col-sm-6 col-lg-4">
-            <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalFilme" >
-              Adicionar Filme
-            </button>
-    
-            <!-- <button class="btn btn-success">Novo</button> -->
-          </div>
+    </div>
+    <!-- fim row -->
+    <br>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Digite o título do filme">
+          <button type="button" class="btn btn-primary">Buscar</button>
         </div>
-        <!-- fim row -->
-        <br>
-        <div class="row">
-          <div class="col-12 col-sm-6 col-lg4">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Digite o título do filme">
-              <button type="button" class="btn btn-primary">Buscar</button>
-            </div>
-          </div>
-        </div>
-        <!-- fim row -->
-        <hr>
-        <div class="row">
-          <div class="col-12">
-    
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Titulo</th>
-                  <th scope="col">Genero</th>
-                  <th scope="col">Classificação</th>
-                  <th scope="col">Duração</th>
-                  <th scope="col">Data-Estréia</th>
-                  <th scope="col">Editar / Excluir</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th>
-                    <td>
-                      <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      &nbsp;
-                      <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
-                        <i class="bi bi-trash-fill"></i>
-                      </button>
-                    </td>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-            <!-- fim table -->
-          </div>
-        </div>
-        <!-- fim row -->
-    
-        <!-- Modal: Cadastro de Novo Filme ou Editar Filme Existente -->
-        <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilmeTitulo" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header text-white bg-dark">
-                <h5 class="modal-title" id="idModalFilmeTitulo">Cadastrar Novo Filme</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                  aria-label="Fechar"></button>
-              </div>
-              <div class="modal-body">
-                <form id="formFilme">
-                  <input type="hidden" id="idFilme">
-                  <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
-                  <input type="text" class="form-control mb-2" id="genero" placeholder="Gênero" required>
-                  <input type="number" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
-                  <input type="text" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
-                  <input type="date" class="form-control mb-2" id="dataEstreia" required>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnSalvarFilme">Salvar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal: Excluir Filme -->
-        <div class="modal fade" id="modalExcluirFilme" tabindex="-1" aria-labelledby="modalExcluirFilme" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header bg-dark">
-                <img src="./img/aviso.png" alt="" class="img-fluid">
-                &nbsp;&nbsp;&nbsp;
-                <h4 class="modal-title text-white">Alerta</h4>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-              </div>
-              <div class="modal-body">
-                <h5>Deseja realmente excluir o registro?</h5>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="btnExcluirFilme" data-bs-dismiss="modal">Excluir</button>
-              </div>
-            </div>
-          </div>
-        </div>
-    
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    </div>
+    <!-- fim row -->
+    <hr>
+    <div class="row">
+      <div class="col-12">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Genero</th>
+              <th scope="col">Classificação</th>
+              <th scope="col">Duração</th>
+              <th scope="col">Data-Estréia</th>
+              <th scope="col">Editar / Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>
+              <td>
+                <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                &nbsp;
+                <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </td>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <!-- fim table -->
+      </div>
+    </div>
+    <!-- fim row -->
+
+    <!-- Modal: Cadastro de Novo Filme ou Editar Filme Existente -->
+    <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilmeTitulo" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-white bg-dark">
+            <h5 class="modal-title" id="idModalFilmeTitulo">Cadastrar Novo Filme</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formFilme">
+              <input type="hidden" id="idFilme">
+              <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
+              <input type="text" class="form-control mb-2" id="genero" placeholder="Gênero" required>
+              <input type="text" class="form-control mb-2" id="descricao" placeholder="Descrição" required>
+              <input type="number" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
+              <input type="text" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
+              <input type="date" class="form-control mb-2" id="dataEstreia" required>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnSalvarFilme" data-bs-dismiss="modal">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal: Excluir Filme -->
+    <div class="modal fade" id="modalExcluirFilme" tabindex="-1" aria-labelledby="modalExcluirFilme" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <img src="./img/aviso.png" alt="" class="img-fluid">
+            &nbsp;&nbsp;&nbsp;
+            <h4 class="modal-title text-white">Alerta</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <h5>Deseja realmente excluir o registro?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="btnExcluirFilme" data-bs-dismiss="modal">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+  <script type="module" src="/controller/filmeController.js"></script>
 </body>
+
 </html>
