@@ -1,4 +1,4 @@
-import Filme from "../model/filme";
+import Filme from "../model/filme.js";
 
 class FilmeController {
     constructor() {
@@ -8,18 +8,17 @@ class FilmeController {
     }
 
     init() {
-        const btnNovo = document.getElementById("btnNovo");
+        // const btnNovo = document.getElementById("btnNovo");
         const btnSalvarFilme = document.getElementById("btnSalvarFilme");
-        const btnCancelar = document.querySelector(".btn-secondary[data-bs-dismiss='modal']");
-        const btnExcluirFilme = document.getElementById("btnExcluirFilme");
+        // const btnCancelar = document.querySelector(".btn-secondary[data-bs-dismiss='modal']");
+        // const btnExcluirFilme = document.getElementById("btnExcluirFilme");
 
-        btnNovo.addEventListener("click", this.abrirModalCadastro.bind(this));
+        // btnNovo.addEventListener("click", this.abrirModalCadastro());
         btnSalvarFilme.addEventListener("click", this.salvar.bind(this));
-        btnCancelar.addEventListener("click", () => {
-            this.limparFormulario();
-            this.fecharModal("idModalFilme");
-        });
-        btnExcluirFilme.addEventListener("click", () => this.excluir(this.idParaExcluir));
+        // btnCancelar.addEventListener("click", () => {
+        //     this.limparFormulario();
+        //     this.fecharModal("idModalFilme");
+        // });
 
         this.carregarFilmesDoLocalStorage();
     }
@@ -41,19 +40,18 @@ class FilmeController {
         this.atualizarTabela();
 
         // Fecha o modal
-        this.fecharModal("idModalFilme");
+        // this.fecharModal("idModalFilme");
     }
 
     criarFilmeDoFormulario() {
-        const duracao = document.getElementById("duracao").value;
-        console.log("Duração capturada:", duracao); // Verifica o valor capturado
         return new Filme(
-            this.idEmEdicao || Date.now(),
             document.getElementById("titulo").value,
+            document.getElementById("descricao").value,
             document.getElementById("genero").value,
             parseInt(document.getElementById("classificacao").value),
-            duracao,
-            document.getElementById("dataEstreia").value
+            document.getElementById("duracao").value,
+            document.getElementById("dataEstreia").value,
+            this.idEmEdicao || Date.now(),
         );
     }
 
@@ -64,7 +62,15 @@ class FilmeController {
     carregarFilmesDoLocalStorage() {
         const filmesSalvos = localStorage.getItem("filmes");
         if (filmesSalvos) {
-            this.listaFilmes = JSON.parse(filmesSalvos);
+            this.listaFilmes = JSON.parse(filmesSalvos).map(filme => new Filme(
+                filme.titulo,
+                filme.descricao,
+                filme.genero,
+                filme.classificacao,
+                filme.duracao,
+                filme.dataEstreia,
+                filme.id
+            ));
             this.atualizarTabela();
         }
     }
@@ -173,5 +179,4 @@ class FilmeController {
 // Inicializa o FilmeController quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
     const filmeController = new FilmeController();
-    window.filmeController = filmeController; // Exposição global, se necessário
 });
