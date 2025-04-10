@@ -10,17 +10,29 @@ class FilmeController {
     init() {
         // const btnNovo = document.getElementById("btnNovo");
         const btnSalvarFilme = document.getElementById("btnSalvarFilme");
+        const btnBuscarFilme = document.getElementById("btnBuscarFilme");
+        const nomeFilme = document.getElementById("buscaNomeFilme").value;
         // const btnCancelar = document.querySelector(".btn-secondary[data-bs-dismiss='modal']");
         // const btnExcluirFilme = document.getElementById("btnExcluirFilme");
 
         // btnNovo.addEventListener("click", this.abrirModalCadastro());
         btnSalvarFilme.addEventListener("click", this.salvar.bind(this));
+        btnBuscarFilme.addEventListener("click", this.buscarFilme.bind(this, ));
         // btnCancelar.addEventListener("click", () => {
         //     this.limparFormulario();
         //     this.fecharModal("idModalFilme");
         // });
 
         this.carregarFilmesDoLocalStorage();
+    }
+
+    buscarFilme(nomeFilme) {
+        if (nomeFilme === "" || nomeFilme === null) {
+            this.atualizarTabela(this.listaFilmes);
+            return;
+        }
+        const resultado = this.listaFilmes.filter(filme => filme.getTitulo().toLowerCase().includes(nomeFilme.toLowerCase()));
+        this.atualizarTabela(resultado);
     }
 
     salvar() {
@@ -37,7 +49,7 @@ class FilmeController {
 
         // Salva no localStorage e atualiza a tabela
         this.salvarNoLocalStorage();
-        this.atualizarTabela();
+        this.atualizarTabela(this.listaFilmes);
 
         // Fecha o modal
         // this.fecharModal("idModalFilme");
@@ -71,15 +83,15 @@ class FilmeController {
                 filme.dataEstreia,
                 filme.id
             ));
-            this.atualizarTabela();
+            this.atualizarTabela(this.listaFilmes);
         }
     }
 
-    atualizarTabela() {
+    atualizarTabela(listaFilmes) {
         const tbody = document.querySelector("tbody");
         tbody.innerHTML = "";
 
-        this.listaFilmes.forEach(filme => {
+        listaFilmes.forEach(filme => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>${filme.id}</td>
