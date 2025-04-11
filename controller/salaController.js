@@ -74,6 +74,29 @@ class SalaController {
         this.atualizarTabela(resultado);
     }
 
+    abrirModalEdicao(sala) {
+        this.idEmEdicao = sala.getId();
+        document.getElementById("nomeSala").value = sala.getNome();
+        document.getElementById("capacidade").value = sala.getCapacidade();
+        document.getElementById("tipo").value = sala.getTipo();
+        document.getElementById("idModalSalaTitulo").textContent = "Editar Sala";
+        const modal = new bootstrap.Modal(document.getElementById("idModalSala"));
+        modal.show();
+    }
+
+    abrirModalExcluir(salaId)  {
+        const modal = new bootstrap.Modal(document.getElementById("modalExcluirSala"));
+        modal.show();
+        const btnExcluirSala= document.getElementById("btnExcluirSala");
+        btnExcluirSala.addEventListener("click", this.excluir.bind(this, salaId));
+    }
+
+    excluir(id) {
+        this.listaSalas = this.listaSalas.filter(element => element.getId() !== id);
+        this.salvarNoLocalStorage();
+        this.atualizarTabela(this.listaSalas);
+    }
+
     atualizarTabela(salas) {
         const tabela = document.querySelector("tbody");
         tabela.innerHTML = ""; // Limpa a tabela
@@ -81,20 +104,23 @@ class SalaController {
         salas.forEach((sala) => {
             const linha = document.createElement("tr");
             linha.innerHTML = `
-                <td>${sala.id}</td>
-                <td>${sala.nome}</td>
-                <td>${sala.capacidade}</td>
-                <td>${sala.tipo}</td>
+                <td>${sala.getId()}</td>
+                <td>${sala.getNome()}</td>
+                <td>${sala.getCapacidade()}</td>
+                <td>${sala.getTipo()}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm btn-editar" data-id="${sala.id}">
+                    <button class="btn btn-warning btn-sm btn-editar align-top" data-id="${sala.id}">
                         Editar
                     </button>
-                    <button class="btn btn-danger btn-sm btn-excluir" data-id="${sala.id}">
+                    <button class="btn btn-danger btn-sm btn-excluir align-top" data-id="${sala.id}">
                         Excluir
                     </button>
                 </td>
             `;
             tabela.appendChild(linha);
+
+            linha.querySelector(".btn-editar").addEventListener("click", () => this.abrirModalEdicao(sala));
+            linha.querySelector(".btn-excluir").addEventListener("click", () => this.abrirModalExcluir(sala.getId()));
         });
     }
 }

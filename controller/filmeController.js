@@ -83,9 +83,6 @@ class FilmeController {
     }
 
     abrirModalExcluir(id) {
-        // Armazena o ID do filme a ser excluído
-        this.idParaExcluir = id;
-
         // Exibe o modal de exclusão
         const modal = new bootstrap.Modal(document.getElementById("modalExcluirFilme"));
         modal.show();
@@ -128,10 +125,10 @@ class FilmeController {
                 <td>${filme.duracao}</td>
                 <td>${this.formatarData(filme.dataEstreia)}</td>
                 <td>
-                    <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
+                    <button class="btn btn-warning btn-sm btn-editar align-top" data-id="${filme.id}">
                         Editar
                     </button>
-                    <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
+                    <button class="btn btn-danger btn-sm btn-excluir align-top" data-id="${filme.id}">
                         Excluir
                     </button>
                 </td>
