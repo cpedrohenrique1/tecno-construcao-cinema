@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de Sessoes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <style>
       .nav-link{
@@ -15,13 +15,134 @@
     <div class="container-fluid bg-dark">
         <ul class="nav justify-content-end">
           <li class="nav-item"> <a class="nav-link" href="../index.html">Home</a></li>
-          <li class="nav-item"> <a class="nav-link" href="cadastro-filmes.html">Filmes</a></li>
+          <li class="nav-item"> <a class="nav-link" href="cadastro-Sessaos.html">Sessaos</a></li>
           <li class="nav-item"> <a class="nav-link" href="cadastro-salas.html">Salas</a></li>
           <li class="nav-item"> <a class="nav-link" href="cadastro-sessoes.html">Sessões</a></li>
           <li class="nav-item"> <a class="nav-link" href="venda-ingressos.html">Ingressos</a></li>
         </ul>
       </div>
 
+      <div class="container-fluid">
+        <br>
+        <h3>Sessões</h3>
+        <hr>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalSessao">
+              Adicionar Sessao
+            </button>
+          </div>
+        </div>
+        
+        <br>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Digite o título do Sessao" id="buscaNomeSessao">
+              <button type="button" class="btn btn-primary" id="btnBuscarSessao">Buscar</button>
+            </div>
+          </div>
+        </div>
+        
+        <hr>
+        <div class="row">
+          <div class="col-12 table-responsive">
+    
+            <table class="table table-striped align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Filme</th>
+                  <th scope="col">Sala</th>
+                  <th scope="col">Data e hora</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Idioma</th>
+                  <th scope="col">Formato</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>
+                  <td>
+                  </td>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+            <!-- fim table -->
+          </div>
+        </div>
+        <!-- fim row -->
+    
+        <!-- Modal: Cadastro de Novo Sessao ou Editar Sessao Existente -->
+        <div class="modal fade" id="idModalSessao" tabindex="-1" aria-labelledby="idModalSessaoTitulo" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header text-white bg-dark">
+                <h5 class="modal-title" id="idModalSessaoTitulo">Cadastrar Novo Sessao</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formSessao">
+                  <input type="hidden" id="idSessao">
+                  <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
+                  <select name="genero" class="form-control mb-2" id="genero" placeholder="Gênero" required>
+                    <option value="" disabled selected hidden>Selecione uma opção</option>
+                    <option value="acao">Ação</option>
+                    <option value="triste">Depressivo</option>
+                    <option value="romance">Romance</option>
+                    <option value="terror">Terror</option>
+                  </select>
+                  <textarea name="descricao" class="form-control mb-2" id="descricao" placeholder="Descrição" required></textarea>
+                  <select name="classificacao" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
+                    <option value="" disabled selected hidden>Selecione uma opção</option>
+                    <option value="livre">Livre</option>
+                    <option value="10">10 anos</option>
+                    <option value="12">12 anos</option>
+                    <option value="14">14 anos</option>
+                    <option value="16">16 anos</option>
+                    <option value="18">18 anos</option>
+                  </select>
+                  <input type="number" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
+                  <input type="date" class="form-control mb-2" id="dataEstreia" required>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSalvarSessao" data-bs-dismiss="modal">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="modal fade" id="modalExcluirSessao" tabindex="-1" aria-labelledby="modalExcluirSessao" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header bg-dark">
+                <h4 class="modal-title text-white">Alerta</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                <h5>Deseja realmente excluir o registro?</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnExcluirSessao" data-bs-dismiss="modal">Excluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script type="module" src="../controller/sessaoController.js"></script>
 </body>
 </html>
