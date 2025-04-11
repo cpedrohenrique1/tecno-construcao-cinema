@@ -7,6 +7,11 @@
   <title>Filmes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <style>
+    .nav-link{
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
@@ -68,13 +73,6 @@
               <th></th>
               <th>
               <td>
-                <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
-                  <i class="bi bi-pencil-square"></i>
-                </button>
-                &nbsp;
-                <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
-                  <i class="bi bi-trash-fill"></i>
-                </button>
               </td>
               </th>
             </tr>
@@ -126,7 +124,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal: Excluir Filme -->
+
     <div class="modal fade" id="modalExcluirFilme" tabindex="-1" aria-labelledby="modalExcluirFilme" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
