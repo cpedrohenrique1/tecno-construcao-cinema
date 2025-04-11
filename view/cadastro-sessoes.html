@@ -92,26 +92,22 @@
               <div class="modal-body">
                 <form id="formSessao">
                   <input type="hidden" id="idSessao">
-                  <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
-                  <select name="genero" class="form-control mb-2" id="genero" placeholder="Gênero" required>
-                    <option value="" disabled selected hidden>Selecione uma opção</option>
+                  <select name="filme" class="form-control mb-2" id="filme" placeholder="Filme" required>
+                    <option value="" disabled selected hidden>Selecione um filme</option>
                     <option value="acao">Ação</option>
-                    <option value="triste">Depressivo</option>
-                    <option value="romance">Romance</option>
-                    <option value="terror">Terror</option>
                   </select>
-                  <textarea name="descricao" class="form-control mb-2" id="descricao" placeholder="Descrição" required></textarea>
-                  <select name="classificacao" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
-                    <option value="" disabled selected hidden>Selecione uma opção</option>
-                    <option value="livre">Livre</option>
-                    <option value="10">10 anos</option>
-                    <option value="12">12 anos</option>
-                    <option value="14">14 anos</option>
-                    <option value="16">16 anos</option>
-                    <option value="18">18 anos</option>
+                  <select name="sala" class="form-control mb-2" id="sala" placeholder="Sala" required>
+                    <option value="" disabled selected hidden>Selecione uma sala</option>
+                    <option value="acao">Ação</option>
                   </select>
-                  <input type="number" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
-                  <input type="date" class="form-control mb-2" id="dataEstreia" required>
+                  <input type="datetime-local" class="form-control mb-2" id="dataEstreia" required>
+                  <input type="number" class="form-control mb-2" id="preco" placeholder="Preço" required>
+                  <select name="tipo" class="form-control mb-2" id="tipo" placeholder="Tipo" required>
+                    <option value="" disabled selected hidden>Selecione um tipo</option>
+                    <option value="2D">2D</option>
+                    <option value="3D">3D</option>
+                    <option value="IMAX">IMAX</option>
+                  </select>
                 </form>
               </div>
               <div class="modal-footer">
