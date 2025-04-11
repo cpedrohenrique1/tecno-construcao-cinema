@@ -11,23 +11,28 @@ class FilmeController {
         // const btnNovo = document.getElementById("btnNovo");
         const btnSalvarFilme = document.getElementById("btnSalvarFilme");
         const btnBuscarFilme = document.getElementById("btnBuscarFilme");
-        const nomeFilme = document.getElementById("buscaNomeFilme").value;
-        // const btnCancelar = document.querySelector(".btn-secondary[data-bs-dismiss='modal']");
-        // const btnExcluirFilme = document.getElementById("btnExcluirFilme");
-
-        // btnNovo.addEventListener("click", this.abrirModalCadastro());
+        const btnNovo = document.getElementById("btnNovo");
+        
+        btnNovo.addEventListener("click", this.cadastrarFilme.bind(this));
         btnSalvarFilme.addEventListener("click", this.salvar.bind(this));
-        btnBuscarFilme.addEventListener("click", this.buscarFilme.bind(this, ));
-        // btnCancelar.addEventListener("click", () => {
-        //     this.limparFormulario();
-        //     this.fecharModal("idModalFilme");
-        // });
+        btnBuscarFilme.addEventListener("click", this.buscarFilme.bind(this));
 
         this.carregarFilmesDoLocalStorage();
     }
 
-    buscarFilme(nomeFilme) {
-        if (nomeFilme === "" || nomeFilme === null) {
+    cadastrarFilme() {
+        document.getElementById("titulo").value = "";
+        document.getElementById("descricao").value = "";
+        document.getElementById("genero").value = "";
+        document.getElementById("classificacao").value = "";
+        document.getElementById("duracao").value = "";
+        document.getElementById("dataEstreia").value = null;
+        this.idEmEdicao = null;
+    }
+
+    buscarFilme() {
+        const nomeFilme = document.getElementById("buscaNomeFilme").value;
+        if (nomeFilme === "") {
             this.atualizarTabela(this.listaFilmes);
             return;
         }
@@ -60,7 +65,7 @@ class FilmeController {
             document.getElementById("titulo").value,
             document.getElementById("descricao").value,
             document.getElementById("genero").value,
-            parseInt(document.getElementById("classificacao").value),
+            document.getElementById("classificacao").value,
             document.getElementById("duracao").value,
             document.getElementById("dataEstreia").value,
             this.idEmEdicao || Date.now(),
@@ -69,6 +74,28 @@ class FilmeController {
 
     salvarNoLocalStorage() {
         localStorage.setItem("filmes", JSON.stringify(this.listaFilmes));
+    }
+
+    excluir(id) {
+        this.listaFilmes = this.listaFilmes.filter(filme => filme.id !== id);
+        this.salvarNoLocalStorage();
+        this.atualizarTabela();
+    }
+
+    abrirModalExcluir(id) {
+        // Armazena o ID do filme a ser excluído
+        this.idParaExcluir = id;
+
+        // Exibe o modal de exclusão
+        const modal = new bootstrap.Modal(document.getElementById("modalExcluirFilme"));
+        modal.show();
+        const btnExcluirFilme = document.getElementById("btnExcluirFilme");
+        btnExcluirFilme.addEventListener("click", this.excluir.bind(this, id));
+    }
+
+    limparFormulario() {
+        document.getElementById("formFilme").reset();
+        this.idEmEdicao = null; // Reseta o ID de edição
     }
 
     carregarFilmesDoLocalStorage() {
@@ -98,15 +125,14 @@ class FilmeController {
                 <td><strong>${filme.titulo}</strong></td>
                 <td>${filme.genero}</td>
                 <td>${filme.classificacao}</td>
-                <td>${filme.duracao}</td> <!-- Exibe a duração -->
+                <td>${filme.duracao}</td>
                 <td>${this.formatarData(filme.dataEstreia)}</td>
                 <td>
                     <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
-                        <i class="bi bi-pencil-square"></i>
+                        Editar
                     </button>
-                    &nbsp;
                     <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
-                        <i class="bi bi-trash-fill"></i>
+                        Excluir
                     </button>
                 </td>
             `;
@@ -121,7 +147,7 @@ class FilmeController {
     excluir(id) {
         this.listaFilmes = this.listaFilmes.filter(filme => filme.id !== id);
         this.salvarNoLocalStorage();
-        this.atualizarTabela();
+        this.atualizarTabela(this.listaFilmes);
     }
 
     abrirModalCadastro() {
@@ -134,9 +160,6 @@ class FilmeController {
         // Atualiza o título do modal
         document.getElementById("idModalFilmeTitulo").textContent = "Cadastrar Filme";
 
-        // Exibe o modal
-        const modal = new bootstrap.Modal(document.getElementById("idModalFilme"));
-        modal.show();
     }
 
     abrirModalEdicao(filme) {
@@ -146,40 +169,11 @@ class FilmeController {
         document.getElementById("classificacao").value = filme.classificacao;
         document.getElementById("duracao").value = filme.duracao;
         document.getElementById("dataEstreia").value = filme.dataEstreia;
+        document.getElementById("descricao").value = filme.descricao;
 
         document.getElementById("idModalFilmeTitulo").textContent = "Editar Filme";
         const modal = new bootstrap.Modal(document.getElementById("idModalFilme"));
         modal.show();
-    }
-
-    abrirModalExcluir(id) {
-        // Armazena o ID do filme a ser excluído
-        this.idParaExcluir = id;
-
-        // Exibe o modal de exclusão
-        const modal = new bootstrap.Modal(document.getElementById("modalExcluirFilme"));
-        modal.show();
-    }
-
-    limparFormulario() {
-        document.getElementById("formFilme").reset();
-        this.idEmEdicao = null; // Reseta o ID de edição
-    }
-
-    fecharModal(modalId) {
-        const modalElement = document.getElementById(modalId);
-        const modalInstance = bootstrap.Modal.getInstance(modalElement);
-
-        if (modalInstance) {
-            modalInstance.hide();
-        }
-
-        // Fallback para garantir que a classe modal-open seja removida
-        document.body.classList.remove("modal-open");
-        const backdrop = document.querySelector(".modal-backdrop");
-        if (backdrop) {
-            backdrop.remove();
-        }
     }
 
     formatarData(data) {
