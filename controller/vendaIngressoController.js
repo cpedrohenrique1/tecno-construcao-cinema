@@ -1,7 +1,7 @@
 import Ingresso from "../model/ingresso.js";
 import Sessao from "../model/sessao.js";
 
-class VendaIngressoController{
+class VendaIngressoController {
     constructor() {
         this.listaSessoes = [];
         this.listaIngressos = [];
@@ -13,6 +13,15 @@ class VendaIngressoController{
         this.carregarSessoesLocalStorage();
         const btnSalvarIngresso = document.getElementById("btnSalvarIngresso");
         btnSalvarIngresso.addEventListener("click", this.salvar.bind(this));
+        this.verificarParametros();
+    }
+
+    verificarParametros() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams) {
+            const idSessao = urlParams.get("id");
+            document.getElementById("sessao").value = idSessao;
+        }
     }
 
     salvar() {
@@ -21,20 +30,18 @@ class VendaIngressoController{
         const cpf = document.getElementById("cpf").value;
         const assento = document.getElementById("assento").value;
         const formaPagamento = document.getElementById("pagamento").value;
-        if (this.idEmEdicao) {
-// 
-        } else {
-            const ingresso = new Ingresso(
-                Date.now(), 
-                sessao,
-                nome,
-                cpf,
-                assento,
-                formaPagamento
-            );
-            this.listaIngressos.push(ingresso);
-        }
+
+        const ingresso = new Ingresso(
+            Date.now(),
+            sessao,
+            nome,
+            cpf,
+            assento,
+            formaPagamento
+        );
+        this.listaIngressos.push(ingresso);
         this.salvarLocalStorage();
+        console.log("Compra realizada com sucesso!");
     }
 
     salvarLocalStorage() {
@@ -47,7 +54,6 @@ class VendaIngressoController{
             this.listaSessoes = JSON.parse(sessoesSalvas).map(
                 sessao => new Sessao(sessao.id, sessao.filme, sessao.sala, sessao.dataHora, sessao.preco, sessao.idioma, sessao.formato)
             );
-
             this.atualizarSelectSessoes();
         }
     }
@@ -67,6 +73,6 @@ class VendaIngressoController{
     }
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     const vendaIngressoController = new VendaIngressoController();
 })
