@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Venda ingresso</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <style>
       .nav-link{
@@ -22,6 +22,52 @@
         </ul>
       </div>
 
+      <div class="container-fluid">
+        <br>
+        <h3>Ingressos</h3>
+        <hr>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalIngresso">
+              Venda de ingressos
+            </button>
+          </div>
+        </div>
+
+        <div class="modal fade" id="idModalIngresso" tabindex="-1" aria-labelledby="idModalIngressoTitulo" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header text-white bg-dark">
+                <h5 class="modal-title" id="idModalIngressoTitulo">Venda de Ingressos</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formIngresso">
+                  <input type="hidden" id="idIngresso">
+                  <select name="sessao" class="form-control mb-2" id="sessao" placeholder="Sessao" required>
+                  </select>
+                  <input type="text" class="form-control mb-2" id="nome" placeholder="Nome" required>
+                  <input type="text" class="form-control mb-2" id="cpf" placeholder="CPF" required>
+                  <input type="text" class="form-control mb-2" name="assento" id="assento" placeholder="Assento" required>
+                  <select name="pagamento" class="form-control mb-2" id="pagamento" placeholder="Pagamento" required>
+                    <option value="" disabled selected hidden>Selecione uma forma de pagamento</option>
+                    <option value="cartao">Cartão</option>
+                    <option value="dinheiro">Dinheiro</option>
+                    <option value="pix">Pix</option>
+                  </select>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSalvarIngresso" data-bs-dismiss="modal">Confirmar Venda</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script type="module" src="/controller/vendaIngressoController.js"></script>
 </body>
 </html>
